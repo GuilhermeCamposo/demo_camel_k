@@ -26,8 +26,8 @@ spec:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 1,
-      "id": 2,
-      "iteration": 1671549738932,
+      "id": 4,
+      "iteration": 1671561365359,
       "links": [],
       "panels": [
         {
@@ -77,9 +77,9 @@ spec:
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
-                "lastNotNull"
+                "last"
               ],
-              "fields": "/^base_jvm_uptime_seconds\\{container=\"integration\", endpoint=\"http\", instance=\"10\\.131.0.31:8080\", job=\"demo\\-camel-k/api\", namespace=\"demo-camel-k\", pod=\"api-f4544cd77-zw6gr\", prometheus=\"openshift-user-workload-monitoring/user-workload\"\\}$/",
+              "fields": "",
               "values": false
             },
             "text": {},
@@ -211,7 +211,9 @@ spec:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "vendor_memoryPool_usage_max_bytes",
           "tooltip": {
             "shared": true,
@@ -305,7 +307,9 @@ spec:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "vendor_memory_maxNonHeap_bytes",
           "tooltip": {
             "shared": true,
@@ -399,7 +403,9 @@ spec:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "base_thread_count",
           "tooltip": {
             "shared": true,
@@ -491,7 +497,9 @@ spec:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "base_memory_usedHeap_bytes",
           "tooltip": {
             "shared": true,
@@ -770,7 +778,9 @@ spec:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "processing_rate_per_second",
           "tooltip": {
             "shared": true,
@@ -850,8 +860,8 @@ spec:
             "allValue": null,
             "current": {
               "selected": false,
-              "text": "api-f4544cd77-zw6gr",
-              "value": "api-f4544cd77-zw6gr"
+              "text": "api-f4544cd77-5h6mj",
+              "value": "api-f4544cd77-5h6mj"
             },
             "datasource": null,
             "definition": "label_values(application_camel_route_count{job=\"$job\"}, pod)",
@@ -911,7 +921,7 @@ spec:
         ]
       },
       "time": {
-        "from": "now-30m",
+        "from": "now-5m",
         "to": "now"
       },
       "timepicker": {

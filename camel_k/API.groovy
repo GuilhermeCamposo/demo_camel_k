@@ -1,0 +1,24 @@
+// camel-k: language=groovy
+// camel-k: dependency=mvn:io.quarkus:quarkus-jdbc-postgresql
+// camel-k: trait=route.enabled=true trait=logging.json=true trait=prometheus.enabled=true
+// camel-k: open-api=openapi.yml
+// camel-k: build-property=quarkus.datasource.camel.db-kind=postgresql
+// camel-k: resource=file:spec.json
+// camel-k: property=file:db.properties
+
+from('direct:getAll')
+.log('Listing all messages')
+.setBody()
+    .constant('select * from messages')
+.to('jdbc:camel')
+.convertBodyTo(String.class);
+
+from('direct:putMessage')
+.convertBodyTo(String.class)
+.log('saving a new message: ${body}')
+.to('jslt:spec.json?allowContextMapAll=true')
+.setBody()
+    .simple('insert into messages (message) values (\'${body}\')')
+.to('jdbc:camel')
+.setBody()
+    .constant('message saved');

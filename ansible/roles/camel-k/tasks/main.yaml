@@ -1,0 +1,52 @@
+- name: Evaluate {{ demo_project }} Operator Group
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: '{{ verify_tls }}'
+    state: present
+    api_version: operators.coreos.com/v1
+    kind: OperatorGroup
+    definition:
+      metadata:
+        name: '{{ demo_project }}-operatorgroup'
+        namespace: '{{ demo_project }}'
+      spec:
+        targetNamespaces:
+          - '{{ demo_project }}'
+
+- name: Evaluate Camel K Subscription
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: '{{ verify_tls }}'
+    state: present
+    api_version: operators.coreos.com/v1alpha1
+    kind: Subscription
+    definition:
+      metadata:
+        name: red-hat-camel-k
+        namespace: '{{ demo_project }}'
+      spec:
+        channel: 1.8.x
+        installPlanApproval: Automatic
+        name: red-hat-camel-k
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+
+- name: Wait Camel K Operator To Be Running
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: '{{ verify_tls }}'
+    api_version: v1
+    kind: Pod
+    namespace: '{{ demo_project }}'
+    label_selectors:
+      - app = camel-k
+      - name = camel-k-operator
+    field_selectors:
+      - status.phase=Running
+  register: r_camelk_operator_pod
+  retries: 120
+  delay: 10
+  until: r_camelk_operator_pod.resources | list | length == 1

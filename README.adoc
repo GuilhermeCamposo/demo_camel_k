@@ -1,0 +1,46 @@
+= Demo Camel K
+
+== Installation
+
+=== Ansible requirements
+
+* https://www.ansible.com/[Ansible 3]
+- https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#control-node-requirements[Ansible's requirement]
+* https://pypi.org/project/kubernetes/[Python's Kubernetes module]
+
+=== Parameters
+
+[options="header"]
+|=======================
+| Parameter | Example Value                                      | Definition
+| token     | sha256~vFanQbthlPKfsaldJT3bdLXIyEkd7ypO_XPygY1DNtQ | access token for a user with cluster-admin privileges
+| server    | https://api.mycluster.opentlc.com:6443             | OpenShift cluster API URL
+|=======================
+
+=== Running the installation
+
+You will need an user with permission to create a project and install operators on cluster level.
+Export the user's `token` and the `server` API address as environment variables, then run the following command under the `ansible` folder:
+
+----
+cd demos_camel_k/ansible/
+
+ansible-playbook -e token=${token} -e server=${server} playbook.yml
+----
+
+== Running the integration
+
+----
+cd demos_camel_k/camel_k
+
+oc login
+
+oc project demo-camel-k
+
+oc new-app --name postgresqldb -e POSTGRESQL_USER=redhat -e POSTGRESQL_PASSWORD=redhat  -e POSTGRESQL_DATABASE=camelk quay.io/gcamposo/postgresql-camelk:latest
+
+kamel run API.java 
+
+kamel run Client.java
+----
+

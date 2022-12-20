@@ -1,0 +1,63 @@
+- name: Get Grafana ServiceAccount
+  k8s_info:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    kind: ServiceAccount
+    name:  grafana-serviceaccount
+    namespace: '{{ grafana_project }}'
+    api_version: v1
+  register: r_grafana_sa
+  until:
+    - r_grafana_sa.resources is defined
+    - r_grafana_sa.resources[0].secrets is defined
+  retries: 10
+  delay: 15
+
+- name: Loop Secrets
+  include_tasks: tasks/loop_secrets.yml
+  with_items: '{{ r_grafana_sa.resources[0].secrets  }}'
+
+- name: Evaluate Grafana ServiceAccount permissons
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    api_version: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    definition:
+      metadata:
+        name: thanos-metric-viewer
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-monitoring-view
+      subjects:
+      - kind: ServiceAccount
+        name: grafana-serviceaccount
+        namespace: '{{ grafana_project }}'
+
+- name: Evaluate Grafana Datasource
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', 'grafana_datasource.yml.j2') }}"
+
+- name: Evaluate Camel Quarkus Dashboard
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', 'grafana_camelquarkus_dashboard.yml.j2') }}"
+
+- name: Evaluate JVM Dashboard
+  k8s:
+    api_key: '{{ token }}'
+    host: '{{ server }}'
+    validate_certs: no
+    state: present
+    resource_definition: "{{ lookup('template', 'grafana_jvm_dashboard.yml.j2') }}"

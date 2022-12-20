@@ -1,0 +1,33 @@
+openapi: 3.0.2
+info:
+  title: Camel K REST Example
+  version: 1.0.0
+  description: example on how to use Camel K
+paths:
+  /v1/camelk:
+    get:
+        responses:
+            '200':
+                description: Successful Response
+                content:
+                    application/json:
+                        schema:
+                            type: string
+        operationId: getAll
+    put:
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        type: string
+                    examples:
+                        message-example:
+                            value: '"some text"'
+            required: true
+        responses:
+            '201':
+                description: Message saved
+            '500':
+                description: Internal Error
+        operationId: putMessage
+

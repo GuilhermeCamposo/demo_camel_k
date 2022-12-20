@@ -1,0 +1,15 @@
+- name: Provision User Monitoring
+  include_tasks: provision_monitoring.yml
+  when:
+  - enable_user_workload_monitoring
+  - not delete_demo
+
+- name: Configure User Monitoring
+  include_tasks: configure_monitoring.yml
+  when:
+  - enable_user_workload_monitoring
+  - not delete_demo
+
+- name: Delete Monitoring
+  include_tasks: delete_monitoring.yml
+  when: delete_demo | bool

@@ -2,7 +2,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: ClusterLogForwarder
     api_version: logging.openshift.io/v1
@@ -31,7 +31,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     definition: "{{ lookup('file', './files/logging-instance.yml' ) | from_yaml }}"
 
@@ -39,7 +39,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: OperatorGroup
     api_version: operators.coreos.com/v1
@@ -55,7 +55,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: Namespace
     api_version: v1
@@ -71,7 +71,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: Subscription
     api_version: operators.coreos.com/v1alpha1
@@ -91,7 +91,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: OperatorGroup
     api_version: operators.coreos.com/v1
@@ -105,7 +105,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: Namespace
     api_version: v1
@@ -122,7 +122,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: absent
     kind: Subscription
     api_version: operators.coreos.com/v1alpha1

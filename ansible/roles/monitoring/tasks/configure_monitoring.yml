@@ -22,7 +22,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: present
     api_version: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -42,7 +42,7 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: present
     resource_definition: "{{ lookup('template', 'grafana_datasource.yml.j2') }}"
 
@@ -50,6 +50,6 @@
   k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
-    validate_certs: no
+    validate_certs: '{{ verify_tls }}'
     state: present
     resource_definition: "{{ lookup('template', 'grafana_camelk_dashboard.yml.j2') }}"

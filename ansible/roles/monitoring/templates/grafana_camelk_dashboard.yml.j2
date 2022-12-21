@@ -27,16 +27,181 @@ spec:
       "gnetId": null,
       "graphTooltip": 1,
       "id": 4,
-      "iteration": 1671561365359,
+      "iteration": 1671630180766,
       "links": [],
       "panels": [
         {
+          "collapsed": true,
           "datasource": null,
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
             "y": 0
+          },
+          "id": 58,
+          "panels": [],
+          "title": "Endpoint Metrics",
+          "type": "row"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 1
+          },
+          "id": 46,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.5.17",
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "application_camel_exchange_processing_seconds_count{job=\"$job\",pod=\"$pod\"}",
+              "interval": "",
+              "legendFormat": "{{ endpointName }}",
+              "refId": "A"
+            }
+          ],
+          "title": "processing_seconds_count",
+          "type": "stat"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 1
+          },
+          "hiddenSeries": false,
+          "id": 44,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.17",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "application_camel_exchange_processing_rate_per_second{job=\"$job\",pod=\"$pod\"}",
+              "interval": "",
+              "legendFormat": "{{ endpointName }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "processing_rate_per_second",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:188",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:189",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": null,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 7
           },
           "id": 38,
           "title": "JVM Metrics",
@@ -67,7 +232,7 @@ spec:
             "h": 7,
             "w": 6,
             "x": 0,
-            "y": 1
+            "y": 8
           },
           "id": 40,
           "options": {
@@ -126,7 +291,7 @@ spec:
             "h": 7,
             "w": 6,
             "x": 6,
-            "y": 1
+            "y": 8
           },
           "id": 50,
           "options": {
@@ -173,7 +338,7 @@ spec:
             "h": 7,
             "w": 7,
             "x": 12,
-            "y": 1
+            "y": 8
           },
           "hiddenSeries": false,
           "id": 54,
@@ -269,7 +434,7 @@ spec:
             "h": 7,
             "w": 6,
             "x": 0,
-            "y": 8
+            "y": 15
           },
           "hiddenSeries": false,
           "id": 56,
@@ -365,7 +530,7 @@ spec:
             "h": 7,
             "w": 6,
             "x": 6,
-            "y": 8
+            "y": 15
           },
           "hiddenSeries": false,
           "id": 42,
@@ -459,7 +624,7 @@ spec:
             "h": 7,
             "w": 7,
             "x": 12,
-            "y": 8
+            "y": 15
           },
           "hiddenSeries": false,
           "id": 52,
@@ -546,7 +711,7 @@ spec:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 22
           },
           "id": 36,
           "panels": [],
@@ -578,7 +743,7 @@ spec:
             "h": 6,
             "w": 6,
             "x": 0,
-            "y": 16
+            "y": 23
           },
           "id": 26,
           "options": {
@@ -636,7 +801,7 @@ spec:
             "h": 6,
             "w": 6,
             "x": 6,
-            "y": 16
+            "y": 23
           },
           "id": 18,
           "options": {
@@ -668,155 +833,6 @@ spec:
           "timeShift": null,
           "title": "route_exchanges_failed_total",
           "type": "stat"
-        },
-        {
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 6,
-            "x": 0,
-            "y": 22
-          },
-          "id": 46,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.5.17",
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "application_camel_exchange_processing_seconds_count{job=\"$job\",pod=\"$pod\"}",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "title": "processing_seconds_count",
-          "type": "stat"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 6,
-            "x": 6,
-            "y": 22
-          },
-          "hiddenSeries": false,
-          "id": 44,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.17",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "application_camel_exchange_processing_rate_per_second{job=\"$job\",pod=\"$pod\"}",
-              "interval": "",
-              "legendFormat": "$pod",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "processing_rate_per_second",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
         }
       ],
       "refresh": "5s",
@@ -931,7 +947,7 @@ spec:
       "timezone": "browser",
       "title": "Camel - Quarkus",
       "uid": "55b736cb0681a1f18a0574780cb0e5176e897eaa",
-      "version": 1
+      "version": 5
     }
-  name: camel-quarkus.json
+      name: camel-quarkus.json
 {% endraw %}

@@ -2,6 +2,10 @@
 
 == Installation
 
+=== Application Requirements
+
+* Camel K Operator 1.10
+
 === Ansible requirements
 
 * https://www.ansible.com/[Ansible 3]

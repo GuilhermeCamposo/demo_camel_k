@@ -1,7 +1,9 @@
 // camel-k: language=java
 // camel-k: dependency=mvn:io.quarkus:quarkus-jdbc-postgresql
-// camel-k: trait=route.enabled=true trait=logging.json=true trait=prometheus.enabled=true
-// camel-k: open-api=openapi.yml
+// camel-k: dependency=camel:jdbc
+// camel-k: dependency=camel:jslt
+// camel-k: trait=route.enabled=true trait=logging.json=false trait=prometheus.enabled=false
+// camel-k: open-api=file:openapi.yml
 // camel-k: build-property=quarkus.datasource.camel.db-kind=postgresql
 // camel-k: resource=file:spec.json
 // camel-k: property=file:db.properties

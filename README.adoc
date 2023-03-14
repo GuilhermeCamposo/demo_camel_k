@@ -43,8 +43,16 @@ oc project demo-camel-k
 
 oc new-app --name postgresqldb -e POSTGRESQL_USER=redhat -e POSTGRESQL_PASSWORD=redhat  -e POSTGRESQL_DATABASE=camelk quay.io/gcamposo/postgresql-camelk:latest
 
+oc create cm camel-k-api --from-file=openapi.yml
+
 kamel run API.java 
 
 kamel run Client.java
 ----
 
+== Testing the integration
+
+----
+export ROUTE=$(oc get route api -o jsonpath='{.spec.host}')
+curl $ROUTE/v1/camelk
+----

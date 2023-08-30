@@ -6,7 +6,6 @@
     demo_project: demo-camel-k
     demo_display_name: Demo Camel K
     demo_description: Project used in Camel K demo
-    grafana_project: '{{ demo_project }}-grafana'
     grafana_user: root
     grafana_password: secret
     enable_logging: true

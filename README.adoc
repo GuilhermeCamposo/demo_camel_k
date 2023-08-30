@@ -2,9 +2,11 @@
 
 == Installation
 
-=== Application Requirements
+=== Products utilized 
 
 * Camel K Operator 1.10
+* Grafana Operator v5
+* OpenShift 4.13
 
 
 === Ansible requirements

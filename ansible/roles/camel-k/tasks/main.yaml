@@ -15,7 +15,7 @@
           - '{{ demo_project }}'
 
 - name: Evaluate Camel K Subscription
-  k8s:
+  kubernetes.core.k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'
     validate_certs: '{{ verify_tls }}'
@@ -34,7 +34,7 @@
         sourceNamespace: openshift-marketplace
 
 - name: Wait Camel K Operator To Be Running
-  k8s_info:
+  kubernetes.core.k8s_info:
     api_key: '{{ token }}'
     host: '{{ server }}'
     validate_certs: '{{ verify_tls }}'

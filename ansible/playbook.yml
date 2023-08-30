@@ -12,20 +12,20 @@
     enable_logging: true
     enable_user_workload_monitoring: true
   tasks:
-
-    - name: 'Check Parameters'
-      ansible.builtin.fail: msg="This play requires 'server' and 'token' to be defined"
+    - name: Check Required Parameters
+      ansible.builtin.fail:
+        msg: "This playbook requires 'server' and 'token' to be defined"
       when:
-        - server is not defined
-        - token is not defined
+        - (server is undefined) or (token is undefined) or (server | length == 0) or (token | length == 0)
+      ignore_errors: false
 
     - name: 'Define domain'
       ansible.builtin.set_fact:
         domain: "{{ server | regex_replace('https://api.') | regex_replace(':6443') }}"
 
-    - name: 'Evaluate {{ demo_project }} Namespace'
+    - name: Evaluate Namespace {{ demo_project }}
       when: not delete_demo
-      k8s:
+      kubernetes.core.k8s:
         api_key: '{{ token }}'
         host: '{{ server }}'
         validate_certs: '{{ verify_tls }}'
@@ -41,7 +41,7 @@
 
     - name: Evaluate Operator Group
       when: not delete_demo
-      k8s:
+      kubernetes.core.k8s:
         api_key: '{{ token }}'
         host: '{{ server }}'
         validate_certs: '{{ verify_tls }}'
@@ -56,10 +56,6 @@
             targetNamespaces:
               - '{{ demo_project }}'
 
-    - name: Include Logging role
-      ansible.builtin.include_role:
-        name: logging
-
     - name: Include Monitoring role
       ansible.builtin.include_role:
         name: monitoring
@@ -68,9 +64,9 @@
       ansible.builtin.include_role:
         name: camel-k
 
-    - name: Delete {{ demo_project }} Namespace
+    - name: Delete Namespace {{ demo_project }}
       when: delete_demo | bool
-      k8s:
+      kubernetes.core.k8s:
         api_key: '{{ token }}'
         host: '{{ server }}'
         validate_certs: '{{ verify_tls }}'

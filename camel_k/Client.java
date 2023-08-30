@@ -1,4 +1,5 @@
 // camel-k: language=java
+// camel-k: trait=prometheus.enabled=true
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.Exchange;

@@ -1,12 +1,14 @@
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: camel-quarkus
   labels:
     app: grafana
-  namespace: '{{ grafana_project }}'
- {% raw %}
 spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana-a
+  name: camel-quarkus.json
   json: |
     {
       "annotations": {
@@ -949,5 +951,3 @@ spec:
       "uid": "55b736cb0681a1f18a0574780cb0e5176e897eaa",
       "version": 5
     }
-      name: camel-quarkus.json
-{% endraw %}

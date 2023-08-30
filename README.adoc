@@ -6,6 +6,7 @@
 
 * Camel K Operator 1.10
 
+
 === Ansible requirements
 
 * https://www.ansible.com/[Ansible 3]
@@ -18,7 +19,7 @@
 |=======================
 | Parameter | Example Value                                      | Definition
 | token     | sha256~vFanQbthlPKfsaldJT3bdLXIyEkd7ypO_XPygY1DNtQ | access token for a user with cluster-admin privileges
-| server    | https://api.mycluster.opentlc.com:6443             | OpenShift cluster API URL
+| server    | https://api.my-cluster.com:6443                    | OpenShift cluster API URL
 |=======================
 
 === Running the installation
@@ -32,16 +33,23 @@ cd demos_camel_k/ansible/
 ansible-playbook -e token=${token} -e server=${server} playbook.yml
 ----
 
-== Running the integration
+== Running the example
+
+First you need to prepare the environment by creating the database used by the application:
 
 ----
-cd demos_camel_k/camel_k
-
+# make sure you're logged in the right cluster
 oc login
 
 oc project demo-camel-k
 
 oc new-app --name postgresqldb -e POSTGRESQL_USER=redhat -e POSTGRESQL_PASSWORD=redhat  -e POSTGRESQL_DATABASE=camelk quay.io/gcamposo/postgresql-camelk:latest
+----
+
+now you can create the integrations following the instructions:
+
+----
+cd demos_camel_k/camel_k
 
 oc create cm camel-k-api --from-file=openapi.yml
 

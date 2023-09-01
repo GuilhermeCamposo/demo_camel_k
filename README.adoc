@@ -54,6 +54,7 @@ now you can create the integrations following the instructions:
 cd demos_camel_k/camel_k
 
 oc create cm camel-k-api --from-file=openapi.yml
+oc create cm jslt-spec --from-file=spec.json
 
 kamel run API.java 
 

@@ -45,7 +45,7 @@ First you need to prepare the environment by creating the database used by the a
 # make sure you're logged in the right cluster
 oc login
 
-oc project demo-camel-k
+oc project demo-camelk-api
 
 oc new-app --name postgresqldb -e POSTGRESQL_USER=redhat -e POSTGRESQL_PASSWORD=redhat  -e POSTGRESQL_DATABASE=camelk quay.io/gcamposo/postgresql-camelk:latest
 ----

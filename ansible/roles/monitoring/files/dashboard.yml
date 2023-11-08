@@ -847,8 +847,8 @@ spec:
             "allValue": null,
             "current": {
               "selected": false,
-              "text": "demo-camel-k/api",
-              "value": "demo-camel-k/api"
+              "text": "demo-camelk-api/api",
+              "value": "demo-camelk-api/api"
             },
             "datasource": null,
             "definition": "label_values(job)",
@@ -861,7 +861,7 @@ spec:
             "name": "job",
             "options": [],
             "query": {
-              "query": "label_values(application_camel_route_count{namespace=\"demo-camel-k\"}, job)",
+              "query": "label_values(application_camel_route_count{namespace=\"demo-camelk-api\"}, job)",
               "refId": "StandardVariableQuery"
             },
             "refresh": 2,

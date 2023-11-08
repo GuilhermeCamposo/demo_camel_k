@@ -1,0 +1,32 @@
+- route:
+    id: route-1866
+    from:
+      uri: direct:getAll
+      steps:
+      - log:
+          message: Listing all messages
+      - set-body:
+          constant: select * from messages
+      - to:
+          uri: jdbc:camel
+      - convert-body-to:
+          type: String
+- route:
+    id: route-2702
+    from:
+      uri: direct:putMessage
+      steps:
+      - convert-body-to:
+          type: String
+      - log:
+          message: "saving a new message: ${body}"
+      - to:
+          uri: jslt:spec.json
+          parameters:
+            allowContextMapAll: true
+      - set-body:
+          simple: "insert into messages (message) values ('${body}')"
+      - to:
+          uri: jdbc:camel
+      - set-body:
+          constant: message saved

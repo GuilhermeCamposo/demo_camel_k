@@ -1,5 +1,7 @@
 = Demo Camel K
 
+Camel K demonstration on how to create REST API integrations and connect to databases.
+
 == Installation
 
 === Products utilized 
@@ -59,6 +61,13 @@ kamel run API.java
 
 kamel run Client.java
 ----
+
+== Running Kaoto version(yaml)
+
+----
+kamel run API.yaml --dependency=mvn:io.quarkus:quarkus-jdbc-postgresql --dependency=camel:jdbc --dependency=camel:jslt --trait=route.enabled=true --trait=logging.json=false --trait=prometheus.enabled=true --open-api=configmap:camel-k-api --build-property=quarkus.datasource.camel.db-kind=postgresql --resource=file:spec.json --property=file:db.properties 
+----
+
 
 == Testing the integration
 

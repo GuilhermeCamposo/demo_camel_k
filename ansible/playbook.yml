@@ -4,6 +4,7 @@
     delete_demo: false
     verify_tls: false
     demo_project: demo-camelk-api
+    apicurito_project: demo-apicurito
     demo_display_name: Demo Camel K
     demo_description: Project used in Camel K demo
     grafana_user: root

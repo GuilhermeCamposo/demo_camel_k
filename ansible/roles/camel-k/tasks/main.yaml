@@ -1,4 +1,4 @@
-- name: Evaluate {{ demo_project }} Operator Group
+- name: Evaluate Operator Group {{ demo_project }}
   kubernetes.core.k8s:
     api_key: '{{ token }}'
     host: '{{ server }}'

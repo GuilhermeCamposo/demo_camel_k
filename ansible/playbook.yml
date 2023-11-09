@@ -64,6 +64,10 @@
       ansible.builtin.include_role:
         name: camel-k
 
+    - name: Include Apicurito role
+      ansible.builtin.include_role:
+        name: apicurito
+
     - name: Delete Namespace {{ demo_project }}
       when: delete_demo | bool
       kubernetes.core.k8s:

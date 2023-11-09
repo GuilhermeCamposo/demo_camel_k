@@ -55,7 +55,7 @@
 
 - name: Wait for Apicurito to be running
   ansible.builtin.uri:
-    url: https://apicurito-ui-{{ apicurito_project }}.{{ route_subdomain }}
+    url: https://apicurito-ui-{{ apicurito_project }}.apps.{{ domain }}
     status_code: '200'
   register: result
   until: result.status == 200

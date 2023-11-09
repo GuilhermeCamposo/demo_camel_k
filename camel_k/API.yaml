@@ -1,5 +1,5 @@
 - route:
-    id: route-1866
+    id: list-messages
     from:
       uri: direct:getAll
       steps:
@@ -12,7 +12,7 @@
       - convert-body-to:
           type: String
 - route:
-    id: route-2702
+    id: save-messages
     from:
       uri: direct:putMessage
       steps:

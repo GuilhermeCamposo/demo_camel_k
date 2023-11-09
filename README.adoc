@@ -45,9 +45,7 @@ First you need to prepare the environment by creating the database used by the a
 # make sure you're logged in the right cluster
 oc login
 
-oc project demo-camelk-api
-
-oc new-app --name postgresqldb -e POSTGRESQL_USER=redhat -e POSTGRESQL_PASSWORD=redhat  -e POSTGRESQL_DATABASE=camelk quay.io/gcamposo/postgresql-camelk:latest
+oc new-app --name postgresqldb -e POSTGRESQL_USER=redhat -e POSTGRESQL_PASSWORD=redhat  -e POSTGRESQL_DATABASE=camelk quay.io/gcamposo/postgresql-camelk:latest -n demo-camelk-api
 ----
 
 now you can create the integrations following the instructions:
@@ -65,7 +63,10 @@ kamel run Client.java
 == Running Kaoto version(yaml)
 
 ----
-kamel run API.yaml --dependency=mvn:io.quarkus:quarkus-jdbc-postgresql --dependency=camel:jdbc --dependency=camel:jslt --trait=route.enabled=true --trait=logging.json=false --trait=prometheus.enabled=true --open-api=configmap:camel-k-api --build-property=quarkus.datasource.camel.db-kind=postgresql --resource=file:spec.json --property=file:db.properties 
+
+oc project demo-camelk-api
+
+kamel run API.yaml --dependency=mvn:io.quarkus:quarkus-jdbc-postgresql --dependency=camel:jdbc --dependency=camel:jslt --trait=route.enabled=true --trait=logging.json=false --trait=prometheus.enabled=true --open-api=file:openapi.yml --build-property=quarkus.datasource.camel.db-kind=postgresql --resource=file:spec.json --property=file:db.properties 
 ----
 
 
@@ -73,5 +74,7 @@ kamel run API.yaml --dependency=mvn:io.quarkus:quarkus-jdbc-postgresql --depende
 
 ----
 export ROUTE=$(oc get route api -o jsonpath='{.spec.host}')
+
+#List messages saved in the db
 curl $ROUTE/v1/camelk
 ----

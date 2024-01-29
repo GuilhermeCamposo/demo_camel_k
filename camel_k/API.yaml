@@ -5,18 +5,18 @@
       steps:
       - log:
           message: Listing all messages
-      - set-body:
+      - setBody:
           constant: select * from messages
       - to:
           uri: jdbc:camel
-      - convert-body-to:
+      - convertBodyTo:
           type: String
 - route:
     id: save-messages
     from:
       uri: direct:putMessage
       steps:
-      - convert-body-to:
+      - convertBodyTo:
           type: String
       - log:
           message: "saving a new message: ${body}"
@@ -24,9 +24,9 @@
           uri: jslt:spec.json
           parameters:
             allowContextMapAll: true
-      - set-body:
+      - setBody:
           simple: "insert into messages (message) values ('${body}')"
       - to:
           uri: jdbc:camel
-      - set-body:
+      - setBody:
           constant: message saved
